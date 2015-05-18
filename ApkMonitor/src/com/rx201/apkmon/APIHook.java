@@ -499,6 +499,7 @@ public class APIHook extends Application {
     
     public static native void saveDecisions(String path, byte[] data);
     public static native byte[] loadDecisions(String path);
+    public static native void writeLog(String msg,String pkgname); //added by Song
    
     
     static {
@@ -816,8 +817,18 @@ class Utility {
 		//Shupeng Xu
 		String permissionName = permission.getPermissionIdentifier();
 		String permissionUID = permission.getGroupingIdentifier();
-		LogAccess(permissionName, permissionUID);
+		/*modified by Song*/
+		String pkgname = APIHook.getSystemContext().getPackageName();
+		String msgLog = String.format("%s %s: %s %s\n", 
+	    		now("yyyy-MM-dd hh:mm:ss"),
+	    		pkgname,
+	    		permissionName, permissionUID != null ? permissionUID : "");
+		APIHook.LOG_I("APIHook", "hsong-----Song add writelog begin : ");
+		APIHook.writeLog(msgLog,pkgname);
+		APIHook.LOG_I("APIHook", "hsong-----Song add writelog end : ");
 		return true;
+		
+		//LogAccess(permissionName, permissionUID);
 	
 		/*
 		if (isASMAvailable()) {
@@ -853,7 +864,7 @@ class Utility {
 		*/
 	}
     
-	private static Class clsAMN = null;
+    private static Class clsAMN = null;
     private static Method AM_getDefault;
     private static Class IfAM;
     private static Class cls_IApplicationThread;
