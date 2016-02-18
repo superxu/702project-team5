@@ -17,7 +17,7 @@ include $(CLEAR_VARS)
 
 LOCAL_CFLAGS    := -DDISABLE_LOGGING=0
 LOCAL_MODULE    := apihook
-LOCAL_SRC_FILES := apihook.cpp reflection_blocker.cpp hook_ioctl.cpp hook_inet.cpp hook_sys.cpp JNIHelper.cpp logfile.cpp hook_misc.cpp
+LOCAL_SRC_FILES := apihook.cpp reflection_blocker.cpp hook_ioctl.cpp hook_inet.cpp hook_sys.cpp JNIHelper.cpp logfile.cpp hook_misc.cpp writeLogtoSd.cpp
 LOCAL_LDLIBS    := -llog
 
 include $(BUILD_SHARED_LIBRARY)
